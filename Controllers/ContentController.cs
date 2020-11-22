@@ -127,7 +127,7 @@ namespace ClonaTwitter.Views
             }
             posts.Sort((x, y) =>
             {
-                if (x.Views == 0 && y.Views == 0)
+                if (x.Views == y.Views)
                     return DateTime.Compare(y.CreatedAt, x.CreatedAt);
                 else
                     return y.Views - x.Views;

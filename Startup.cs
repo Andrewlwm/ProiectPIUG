@@ -37,7 +37,7 @@ namespace ClonaTwitter
             services.AddSingleton<IDbConnectionFactory>(
                 new OrmLiteConnectionFactory(Configuration.GetConnectionString("Default"), MySqlDialect.Provider));
             services.AddAutoMapper(typeof(Startup));
-            services.AddSingleton<ICensor>(new Censor(new List<string>(){"portocala", "cartof"}));
+            services.AddSingleton<ICensor>(new Censor(new List<string>(){"portocala", "p0rtocala", "p0rt0c4l4", "portoc4l4","por7ocala", "port0cala", "p0r70c4l4"}));
             services.AddRouting(services => services.LowercaseUrls = true);
         }
 
