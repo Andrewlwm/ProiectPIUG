@@ -34,7 +34,14 @@
         @{
             ViewData["PostId"] = Model.Id;
         }
-        <partial name="AddComment" model="new ClonaTwitter.Models.ReplyModel()" view-data="ViewData" />
+        @if (User.Identity.IsAuthenticated)
+        {
+            <partial name="AddComment" model="new ClonaTwitter.Models.ReplyModel()" view-data="ViewData" />
+        }
+        else
+        {
+            <p> <a asp-controller="Account" asp-action="SignIn">Sing in to post your own comment!</a></p>
+        }
 
         @foreach (var item in Model.Replies)
         {
