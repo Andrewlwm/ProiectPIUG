@@ -1,0 +1,64 @@
+﻿@model PaginatedList<ClonaTwitter.Data.Post>
+
+@{
+    ViewData["Title"] = "Timeline";
+}
+
+<div class="overflow-hidden">
+
+
+    <button style="width:150px" class="btn btn-outline-primary float-left" onclick="location.href='@Url.Action("AddPost", "Content")'">Post your own!</button>
+
+
+    @if (ViewBag.UserName != null)
+    {
+
+        <button style="width:150px" class="btn btn-outline-danger float-right" onclick="location.href='@Url.Action("Report", "Content")'">Report</button>
+
+        <p><h4 class="text-center clearfix">@ViewBag.UserName's posts </h4></p>
+
+        <hr />
+    }
+</div>
+<div class="row justify-content-center text-center">
+    <div class="col-md-8">
+        @foreach (var item in Model)
+        {
+            <div class="card" style="margin:auto">
+
+                @if (item.MediaUrl.Contains("youtube"))
+                {
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="@item.MediaUrl"></iframe>
+                    </div>
+                }
+                else
+                {
+                    <img src="@item.MediaUrl" class="card-img-top">
+                }
+
+
+                <div class="card-body">
+                    <h5 class="card-title">@item.PostTitle</h5>
+                    <p class="card-text">@item.PostBody</p>
+                    <p class="card-text"><small class="text-muted">Created at @item.CreatedAt.ToShortDateString() by <a asp-controller="Content" asp-action="ViewProfile" asp-route-profileName="@item.AuthorName">@item.AuthorName</a></small></p>
+                    <p class="card-text"><small id="likes" class="text-muted">Total views : @item.Views</small></p>
+                    <button style="width:200px" class="btn btn-outline-success" onclick="location.href='@Url.Action("ViewPost", "Content", new { Id=item.Id })'">View the comments</button>
+                </div>
+            </div>
+            <br />
+        }
+
+        @{
+            var prevDisabled = !Model.PreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.NextPage ? "disabled" : "";
+        }
+
+
+        <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex - 1)"
+           class="btn btn-default text-dark @prevDisabled">Previous</a>
+        <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)"
+           class="btn btn-default text-dark @nextDisabled">Next</a>
+
+    </div>
+</div>

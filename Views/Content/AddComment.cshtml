@@ -1,0 +1,19 @@
+﻿@model ClonaTwitter.Models.ReplyModel
+<hr />
+<form asp-action="AddComment">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="ReplyBody" class="control-label">Add a comment!</label>
+        <textarea asp-for="ReplyBody" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="ReplyBody" class="text-danger"></span>
+    </div>
+    <input type="number" value="@ViewData["PostId"]" asp-for="PostId" hidden />
+    <div class="form-group">
+        <input id="submit" type="submit" value="Add Comment" class="btn btn-outline-success" style="width:200px" />
+    </div>
+</form>
+<hr />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

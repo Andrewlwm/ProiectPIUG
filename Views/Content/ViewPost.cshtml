@@ -1,0 +1,51 @@
+﻿@model ClonaTwitter.Data.Post;
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<div class="overflow-hidden">
+    <button style="width:150px" class="btn btn-outline-primary float-left" onclick="location.href='@Url.Action("AddPost", "Content")'">Post your own!</button>
+</div>
+
+
+
+<div class="row justify-content-center text-center pt-2">
+    <div class="col-md-10">
+        <div class="card" style="margin:auto">
+
+            @if (Model.MediaUrl.Contains("youtube"))
+            {
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="@Model.MediaUrl"></iframe>
+                </div>
+            }
+            else
+            {
+                <img src="@Model.MediaUrl" class="card-img-top">
+            }
+
+            <div class="card-body">
+                <h5 class="card-title">@Model.PostTitle</h5>
+                <p class="card-text">@Model.PostBody</p>
+                <p class="card-text"><small class="text-muted">Created at @Model.CreatedAt.ToShortDateString() by <a asp-controller="Content" asp-action="ViewProfile" asp-route-profileName="@Model.AuthorName">@Model.AuthorName</a></small></p>
+            </div>
+        </div>
+        @{
+            ViewData["PostId"] = Model.Id;
+        }
+        <partial name="AddComment" model="new ClonaTwitter.Models.ReplyModel()" view-data="ViewData" />
+
+        @foreach (var item in Model.Replies)
+        {
+            <div class="text-left">
+                <small class="text-muted">Created at @item.CreatedAt.ToShortDateString() @item.CreatedAt.ToShortTimeString() by <a asp-controller="Content" asp-action="ViewProfile" asp-route-profileName="@item.AuthorName">@item.AuthorName</a></small>
+                <p>@item.ReplyBody</p>
+                <hr />
+            </div>
+        }
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

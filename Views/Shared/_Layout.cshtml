@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MyCorner</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="~/css/dark-mode.css" rel="stylesheet" />
+    <partial name="_Favicons.cshtml" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H646XDX4H4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-H646XDX4H4');
+    </script>
+</head>
+<body>
+    <header>
+        <nav class="navbar fixed-top navbar-expand-sm navbar-toggleable-sm navbar-dark bg-cyan border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand text-dark" asp-area="" asp-controller="Home" asp-action="Index">MyCorner</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav flex-grow-1">
+
+                        <li class="nav-item">
+                            <a class="btn btn-link text-dark" asp-area="" asp-controller="Content" asp-action="AddPost">Make post</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        <li class="nav-link">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="darkSwitch" />
+                                <label class="custom-control-label text-dark" for="darkSwitch">Dark Mode</label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container justify-content-between">
+            <div class="float-left">
+                &copy; 2020 - PIUG - MyCorner - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+            <div class="float-right">
+                Author
+                <a href="https://github.com/Andrewlwm" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/1024px-Octicons-mark-github.svg.png" style="border-radius:50%; width:30px; height:30px;" />
+                </a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        function myFunction() {
+            var element = document.body;
+            element.classList.toggle("dark-mode");
+        }
+    </script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/dark-mode-switch.min.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H646XDX4H4"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
