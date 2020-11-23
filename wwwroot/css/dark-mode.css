@@ -45,3 +45,11 @@
 [data-theme="dark"] .bg-cyan {
     background-color: #333 !important;
 }
+
+[data-theme="dark"] .text-light {
+    color: white !important;
+}
+
+[data-theme="dark"] a {
+    color: red !important;
+}
